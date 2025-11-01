@@ -19,9 +19,13 @@ db = SQLAlchemy()
 class ProjectPost(db.Model):
     __tablename__ = "project_posts"
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), nullable=False)
-    link = db.Column(db.String(150), nullable=False)
-    description = db.Column(db.Text, nullable=False)
+    title = db.Column(
+        db.String(150), nullable=False, default="This meant to be a title"
+    )
+    link = db.Column(db.String(150), nullable=False, default="This meant to be a link")
+    description = db.Column(
+        db.Text, nullable=False, default="This meant to be a description"
+    )
     # timezone aware
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
