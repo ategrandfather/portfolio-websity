@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
@@ -13,7 +13,7 @@ class Config:
 
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URL",
-        "sqlite:///app.db",
+        "sqlite:///" + os.path.join(BASEDIR, "app.db"),
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
