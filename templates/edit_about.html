@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+        />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit About</title>
+    </head>
+    <body>
+        <div class="ui segment">
+            <h2 class="ui center aligned header">Edit About</h2>
+
+            <!-- Form to edit the About content -->
+            <form method="POST" action="{{ url_for('edit_about') }}">
+                {{ form.hidden_tag() }}
+                <!-- CSRF token from Flask-WTF -->
+
+                <div class="ui form">
+                    <div class="field">
+                        <label for="about_text">About Me</label>
+                        {{ form.about_text(class="ui textarea", rows="20 ") }}
+                    </div>
+                    <button class="ui blue button" type="submit">Save</button>
+                </div>
+            </form>
+
+            <!-- Button to go back -->
+            <a href="{{ url_for('index') }}" class="ui button">Back</a>
+        </div>
+
+        <!-- Initialize CKEditor on the 'about_text' field -->
+        <script>
+            // Replace the textarea with CKEditor
+            CKEDITOR.replace("about_text", {
+                // Optional: You can add more configuration options here
+                height: 300,
+                extraPlugins: "image,embed,autogrow", // Add plugins for images, embeds, etc.
+            });
+        </script>
+    </body>
+</html>

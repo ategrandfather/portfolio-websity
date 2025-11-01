@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Valentine's projects</title>
+    </head>
+
+    <body>
+        <div style="margin-top: 50px" class="ui container">
+            <h1 class="ui center aligned big header">
+                Programming is what keeps me going
+            </h1>
+
+            <div class="ui segment">
+                <button class="ui button" data-target="about">
+                    A little note about myself
+                </button>
+                <button class="ui button" data-target="status">
+                    What am I currently working on
+                </button>
+                <button class="ui button" data-target="image">
+                    Photo of William Dafoe in puma hoodie
+                </button>
+
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('add') }}" class="ui blue button">
+                    Add project
+                </a>
+                {% endif %}
+            </div>
+
+            <dialog id="about" class="modal">
+                <h2>About me</h2>
+                <div
+                    class="ui segment"
+                    style="margin: 10px; font-size: 1.4em; width: 700px"
+                >
+                    <p
+                        style="
+                            font-family:
+                                Impact, Haettenschweiler,
+                                &quot;Arial Narrow Bold&quot;, sans-serif;
+                        "
+                    >
+                        {{ about.content | replace('\n', '<br />') | safe }}
+                    </p>
+                </div>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('edit_about')}}"> Edit </a>
+                {% endif %}
+                <button class="button close-button">Close</button>
+            </dialog>
+
+            <dialog id="status" class="modal">
+                <div class="ui segment">
+                    <h2>What am I currently doing</h2>
+                    <div
+                        class="ui segment"
+                        style="margin: 10px; font-size: 1.4em; width: 700px"
+                    >
+                        {% if status %}
+                        <p>
+                            {{ status.message| replace('\n', '<br />') | safe }}
+                        </p>
+                        {% else %}
+                        <p>No current status set.</p>
+                        {% endif %}
+                    </div>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('edit_status')}}"> Edit </a>
+                    {% endif %}
+                    <button class="button close-button">Close</button>
+                </div>
+            </dialog>
+
+            <dialog id="image" class="modal">
+                <div class="ui center aligned segment">
+                    <img
+                        src="{{ url_for('static', filename='images/williamdafoe.png') }}"
+                        alt="William Dafoe"
+                    />
+                </div>
+                <button class="button close-button">Close</button>
+            </dialog>
+
+            <div class="ui segment">
+                <h2 class="ui big header">My Projects</h2>
+                {% for project in projects %}
+                <div class="ui segment" style="margin: 20px">
+                    <a style="font-size: 1.5em" href="{{project.link}}">
+                        {{ project.title }}</a
+                    >
+                    <p style="font-size: 1.3em; margin-top: 10px">
+                        {{ project.description | replace('\n', '<br />') |
+                        safe}}
+                    </p>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('edit', post_id=project.id) }}">Edit</a>
+                    {% endif %}
+                    <form
+                        method="POST"
+                        action="{{ url_for('delete', post_id=project.id) }}"
+                        style="display: inline"
+                    >
+                        {% if current_user.is_authenticated %}
+                        <a
+                            onclick="return confirm('Are you sure you want to delete it?')"
+                            href="{{ url_for('delete', post_id=project.id) }}"
+                            >Delete</a
+                        >
+                        {% endif %}
+                    </form>
+                </div>
+                {% endfor %}
+                <h3 class="ui big header">To be programmed...</h3>
+            </div>
+
+            <div class="ui center aligned segment">
+                <p>&copy {{year}} All right reserved I guess.</p>
+                <a style="display: inline" href="mailto:mflentin@gmail.com"
+                    >Gmail</a
+                >
+                <a
+                    style="display: inline"
+                    href="https://github.com/ategrandfather"
+                    >Github</a
+                >
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
+    </body>
+</html>

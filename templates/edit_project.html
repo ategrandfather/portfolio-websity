@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+        <title>Edit project</title>
+    </head>
+    <body>
+        <div class="ui container">
+            <h2 class="ui center aligned header" style="margin-top: 50px">
+                Edit Project
+            </h2>
+            <form class="ui form" method="POST">
+                {{ form.hidden_tag() }}
+                <div>
+                    <label for="title">Title</label>
+                    {{ form.title(size=32) }}
+                </div>
+                <div>
+                    <label for="description">Description</label>
+                    {{ form.description(rows=5, cols=32)}}
+                </div>
+                <div>
+                    <label for="link">Link</label>
+                    {{ form.link(size=32) }}
+                </div>
+                <div>{{ form.submit() }}</div>
+            </form>
+
+            <a href="{{ url_for('index') }}">Back to Projects</a>
+        </div>
+    </body>
+</html>

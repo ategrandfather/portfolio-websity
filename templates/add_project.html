@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+    </head>
+    <body>
+        <div class="ui container">
+            {% block content %}
+            <h2 style="margin-top: 50px" class="ui center aligned header">
+                Add a New Project
+            </h2>
+            <form class="ui form" method="POST" action="{{ url_for('add') }}">
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.title.label }}<br />
+                    {{ form.title(size=40) }} <br />
+                    {{ form.link.label }}<br />
+                    {{ form.link}}
+                </div>
+                <div>
+                    {{ form.description.label }}<br />
+                    {{ form.description(rows=4, cols=40) }}
+                </div>
+                <div>{{ form.submit() }}</div>
+            </form>
+            {% endblock %}
+        </div>
+    </body>
+</html>
