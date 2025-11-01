@@ -2,11 +2,11 @@ blinker==1.9.0
 certifi==2025.8.3
 charset-normalizer==3.4.3
 click==8.2.1
-dotenv==0.9.9
-Flask==3.1.2
+dotenv==1.0.0
+Flask==2.3.4
 Flask-CKEditor==1.0.0
 Flask-Login==0.6.3
-Flask-SQLAlchemy==3.1.1
+Flask-SQLAlchemy==3.0.4
 Flask-WTF==1.2.2
 greenlet==3.2.4
 gunicorn==23.0.0
