@@ -3,11 +3,11 @@ from main import About, Status
 
 with app.app_context():
     if not About.query.get("main"):
-        about = About(id="main", content="Write your about text here")
+        about = About(id="main", content="Imma default change me lol")
         db.session.add(about)
 
     if not Status.query.get("main"):
-        status = Status(id="main", message="Write your status message here")
+        status = Status(id="main", message="Imma default change me")
         db.session.add(status)
 
     db.session.commit()
